@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./static/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Calendar</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <select id="timeZone" class=""> </select>
+      <div class="days-out">
+        <h2>Días libres</h2>
+        <div class="days-day_off"></div>
+      </div>
+      <div class="calendar">
+        <div class="calendar__head">
+          <p id="calendar__head-year"></p>
+          <span id="calendar__head-dayname"></span>
+          <span id="calendar__head-month"></span>
+          <span id="calendar__head-day"></span>
+        </div>
+        <div class="calendar__body">
+          <div class="calendar__body-month">
+            <button id="btn-l">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                viewBox="0 0 24 24"
+                width="18"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z" />
+              </svg>
+            </button>
+            <p id="date_in_arrows"></p>
+            <button id="btn-r">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                viewBox="0 0 24 24"
+                width="18"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M5.88 4.12L13.76 12l-7.88 7.88L8 22l10-10L8 2z" />
+              </svg>
+            </button>
+          </div>
+          <div class="calendar__body-weekdays">
+            <div>Lun</div>
+            <div>Mar</div>
+            <div>Mie</div>
+            <div>Jue</div>
+            <div>Vie</div>
+            <div>Sab</div>
+            <div>Dom</div>
+          </div>
+          <div class="calendar__body-days"></div>
+          <div class="calendar__body-years">
+            <ul class="list_years"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="hours_and_minutes">
+        
+      </div>
+    </div>
+  </body>
+
+  <script type="module" src="./static/js/app.js"></script>
+</html>

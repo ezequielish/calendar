@@ -1,0 +1,188 @@
+body {
+  margin: 0;
+}
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #d9d9d9;
+  font-family: "Raleway", sans-serif;
+  flex-direction: column;
+}
+
+.disabled {
+  color: grey;
+}
+.calendar {
+  background: whitesmoke;
+  width: 380px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.calendar__head {
+  height: 100px;
+  background: #0dc4de;
+  padding: 1em;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.calendar__head p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.54);
+  padding: 0.5em 0;
+  cursor: pointer;
+}
+.calendar__head span {
+  font-size: 1.7em;
+  color: whitesmoke;
+  font-weight: 700;
+  margin-right: 0.4em;
+}
+.calendar__body {
+  background-color: #ffffff;
+  padding: 1em;
+  position: relative;
+}
+
+.calendar__body-years {
+  background-color: #ffffff;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  overflow-y: scroll;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  visibility: hidden;
+}
+.calendar__body-years ul {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.calendar__body-years ul li {
+  list-style: none;
+  width: 100%;
+  text-align: center;
+  padding: 0.7em;
+  cursor: pointer;
+  font-size: 1em;
+}
+.calendar__body-years ul li {
+  list-style: none;
+  width: 100%;
+  text-align: center;
+  padding: 0.7em;
+  cursor: pointer;
+  font-size: 1em;
+}
+.calendar__body-years ul  .list_years-active {
+  color: #0dc4de;
+  font-size: 1.5em;
+}
+
+.calendar__body-weekdays {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 6px;
+  color: #9e9e9e;
+  margin-bottom: 1em;
+}
+
+.calendar__body-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  height: 280px;
+}
+.calendar__body-month {
+  justify-content: space-between;
+  display: flex;
+}
+.calendar__body-month button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.calendar__body-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.calendar .selectable {
+  transition: all 0.8s;
+}
+
+.active {
+  background-color: #4bc5df;
+  color: whitesmoke;
+}
+
+.selectable:hover {
+  background-color: #dddddd;
+}
+
+.days-out {
+  width: 300px;
+  padding: 0.5em;
+  left: 50px;
+  top: 60px;
+  background-color: #ffffff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  margin: 1em 0;
+}
+
+.schedule {
+  width: 400px;
+  padding: 0.5em;
+  position: absolute;
+  left: 50px;
+  top: 250px;
+  background-color: #ffffff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.schedule div {
+  display: flex;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.schedule div p {
+  border: solid 1px #4bc5df;
+  padding: 0.5em;
+}
+
+.days-day_off {
+  display: flex;
+  padding: 1em;
+  flex-wrap: wrap;
+}
+.days-day_off div {
+  padding: 0.5em;
+  border: solid 1px #0dc4de;
+  margin: 3px;
+  cursor: pointer;
+}
+
+#timeZone {
+  margin-top: 2em;
+  padding: 15px;
+  width: 350px;
+  background-color: white;
+  margin-bottom: 0.5em;
+}
