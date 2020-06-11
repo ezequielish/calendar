@@ -5,17 +5,24 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #d9d9d9;
+  /* background: #d9d9d9; */
+  background-color: white;
   font-family: "Raleway", sans-serif;
   flex-direction: column;
 }
-
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .disabled {
   color: grey;
 }
 .calendar {
   background: whitesmoke;
-  width: 380px;
+  width: 100%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
 }
 
@@ -79,7 +86,7 @@ body {
   cursor: pointer;
   font-size: 1em;
 }
-.calendar__body-years ul  .list_years-active {
+.calendar__body-years ul .list_years-active {
   color: #0dc4de;
   font-size: 1.5em;
 }
@@ -114,8 +121,7 @@ body {
   justify-content: center;
   padding: 6px 0;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  height: 32px;
   cursor: pointer;
   width: 100%;
 }
@@ -129,18 +135,12 @@ body {
   color: whitesmoke;
 }
 
-.selectable:hover {
-  background-color: #dddddd;
-}
-
 .days-out {
-  width: 300px;
+  width: 95%;
   padding: 0.5em;
-  left: 50px;
-  top: 60px;
   background-color: #ffffff;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
-  margin: 1em 0;
+  margin: 1em auto;
 }
 
 .schedule {
@@ -180,9 +180,89 @@ body {
 }
 
 #timeZone {
-  margin-top: 2em;
-  padding: 15px;
-  width: 350px;
+  padding: 1em;
+  width: 90%;
   background-color: white;
-  margin-bottom: 0.5em;
+  margin-top: 1em;
 }
+
+.hours_and_minutes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  width: 90%;
+  background: whitesmoke;
+  margin: 0.4em 0.5em;
+  height: auto;
+  align-items: flex-start;
+  grid-template-rows: 25%;
+  padding: 0.5em;
+}
+.hours_and_minutes div {
+  display: flex;
+  flex-direction: column;
+}
+.hours_and_minutes .hours {
+  margin-top: 0.8em;
+  margin-left: 0.5em;
+  border: solid #0dc4de 1px;
+  border-radius: 8px;
+  display: flex;
+  text-align: center;
+  width: 86%;
+  background: whitesmoke;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+#get_full_date {
+  width: 80%;
+  margin: 1em 1em;
+  padding: 0.5em;
+  background-color: #4bc5df;
+  color: whitesmoke;
+}
+
+.footer {
+  width: 96%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 600px) {
+  .calendar {
+    width: 50%;
+  }
+  #timeZone {
+    width: 50%;
+  }
+
+  .days-out {
+    width: 50%;
+  }
+
+  #get_full_date {
+    width: 50%;
+  }
+  .hours_and_minutes {
+    width: 50%;
+  }
+
+  .calendar__body-day {
+    height: 35px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .calendar__body-days {
+    height: auto;
+  }
+  .calendar__body-day {
+    height: 50px;
+  }
+}
+/* .selectable:hover {
+  background-color: #dddddd;
+} */

@@ -596,3 +596,5 @@ function timeZone() {
 
     return timeZone
 }
+
+export default timeZone

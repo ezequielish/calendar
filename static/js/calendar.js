@@ -13,11 +13,24 @@ export default class Calendar {
     this.$btnR = this.el.querySelector("#btn-r");
     this.$dateInArrows = this.el.querySelector("#date_in_arrows");
     this.$hoursAndMinutes = document.querySelector(".hours_and_minutes");
+    this.$morning = this.$hoursAndMinutes.querySelector(
+      ".hours_and_minutes__schedule_morning"
+    );
+
+    this.$afterNoon = this.$hoursAndMinutes.querySelector(
+      ".hours_and_minutes__schedule_atfer-noon"
+    );
+    this.$night = this.$hoursAndMinutes.querySelector(
+      ".hours_and_minutes__schedule_nigth"
+    );
+
     this.getDay = new Date().getDate();
     this.getMonth = new Date().getMonth();
     this.getYear = new Date().getFullYear();
     this.getDayWeek = new Date().getDay();
     this.daySelected = [new Date().getDate(), new Date().getMonth()];
+    this.getHoursSelected = false;
+    this.getMinutesSelected = false;
     this.getHours = hours;
     this.getMinutes = minutes;
     this.getContinent = continent;
@@ -176,10 +189,18 @@ export default class Calendar {
             dayElement.dataset.day
           )
         );
-        if (!isDisabled && !isDayOff) {
+        if (!isDisabled && !isDayOff) {          
           this.handleDayActive(parseInt(dayElement.dataset.day));
           this.handleDaySelected(parseInt(dayElement.dataset.day));
         }
+      });
+    });
+  }
+  handleClickHours() {
+    this.$hoursAndMinutes.querySelectorAll("div p").forEach((element, i) => {
+      element.addEventListener("click", () => {
+        this.getHoursSelected = parseInt(element.dataset.hours);
+        this.getMinutesSelected = parseInt(element.dataset.minutes);
       });
     });
   }
@@ -210,14 +231,27 @@ export default class Calendar {
     }
   }
 
-  handleHoursChange(hours, minutes, continent, country) {
+  handleHorusChangeEvent(timeZone) {
+    const continent = timeZone.split("/")[0];
+    const country = timeZone.split("/")[1];
+    this.getContinent = continent;
+    this.getCountry = country;
+
+    this.render();
+  }
+
+  handleHoursValue(hours, minutes, continent, country) {
     const year = new Date().getFullYear();
     const month = new Date().getMonth();
     const day = new Date().getDate();
     const date = new Date(year, month, day, hours, minutes);
-    return date.toLocaleString("en-US", {
-      timeZone: `${continent}/${country}`,
-    });
+    const timeZone = continent
+      ? date.toLocaleString("en-US", {
+          timeZone: continent ? `${continent}/${country}` : " ",
+        })
+      : date.toLocaleString("en-US");
+
+    return timeZone;
   }
   buildDays(day, index) {
     const getDay = new Date().getDate();
@@ -230,7 +264,7 @@ export default class Calendar {
           daysOfWeek == 0 && index == 0 ? 7 : daysOfWeek
         }">${day}</div>`;
       } else {
-        return `<div class="calendar__body-day selectable selectable ${
+        return `<div class="calendar__body-day selectable ${
           this.daySelected[0] == day &&
           this.daySelected[1] == this.getMonth &&
           "active"
@@ -284,8 +318,12 @@ export default class Calendar {
   }
 
   renderHours() {
+    this.$morning.innerHTML = "";
+    this.$afterNoon.innerHTML = "";
+    this.$night.innerHTML = "";
+
     this.getHours.map((hours, i) => {
-      const result = this.handleHoursChange(
+      const result = this.handleHoursValue(
         hours,
         this.getMinutes[i],
         this.getContinent,
@@ -294,8 +332,38 @@ export default class Calendar {
       const hoursResult = result.split(" ")[1];
       const turnResult = result.split(" ")[2];
 
-      return (this.$hoursAndMinutes.innerHTML += `<div>${hoursResult} ${turnResult}</div>`);
+      const getHours = hoursResult.split(":")[0];
+      const getMinutes = hoursResult.split(":")[1];
+
+      if (this.getHours[i] < 12) {
+        return (this.$morning.innerHTML += `<p data-minutes=${this.getMinutes[i]} data-hours=${this.getHours[i]} class="hours">${getHours}:${getMinutes} ${turnResult}</p>`);
+      } else if (this.getHours[i] < 18 && this.getHours[i] >= 12) {
+        return (this.$afterNoon.innerHTML += `<p  data-minutes=${this.getMinutes[i]} data-hours=${this.getHours[i]} class="hours" >${getHours}:${getMinutes} ${turnResult}</p>`);
+      } else if (this.getHours[i] < 25 && this.getHours[i] > 18) {
+        return (this.$night.innerHTML += `<p  data-minutes=${this.getMinutes[i]} data-hours=${this.getHours[i]} class="hours" >${getHours}:${getMinutes} ${turnResult}</p>`);
+      }
     });
+  }
+
+  getFullDate() {
+    let fullDate = {};
+
+    if (this.getHoursSelected) {
+      fullDate = {
+        year: this.getYear,
+        month: this.getMonth,
+        day: this.getDay,
+        hours: this.getHoursSelected,
+        minutes: this.getMinutesSelected,
+      };
+    } else {
+      fullDate = {
+        year: this.getYear,
+        month: this.getMonth,
+        day: this.getDay,
+      };
+    }
+    return fullDate;
   }
 
   render() {
@@ -312,10 +380,11 @@ export default class Calendar {
     )},`;
     this.renderDays();
     this.renderSelectionOfYears();
-    console.log("sss", this.yearFree);
+
     if (this.yearFree == false) {
       this.renderHours();
     }
     this.handleClickInDay();
+    this.handleClickHours();
   }
 }
