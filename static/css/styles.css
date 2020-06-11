@@ -5,13 +5,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: #d9d9d9; */
   background-color: white;
   font-family: "Raleway", sans-serif;
   flex-direction: column;
 }
 .wrapper {
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,10 +23,14 @@ body {
   background: whitesmoke;
   width: 100%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  height: auto;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 20% 80%;
+  height: auto;
 }
 
 .calendar__head {
-  height: 100px;
   background: #0dc4de;
   padding: 1em;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
@@ -103,7 +106,7 @@ body {
 .calendar__body-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  height: 280px;
+  /* height: 78%; */
 }
 .calendar__body-month {
   justify-content: space-between;
@@ -124,6 +127,7 @@ body {
   height: 32px;
   cursor: pointer;
   width: 100%;
+  align-self: center;
 }
 
 .calendar .selectable {
@@ -131,7 +135,7 @@ body {
 }
 
 .active {
-  background-color: #4bc5df;
+  background-color: #4bc5df !important;
   color: whitesmoke;
 }
 
@@ -231,38 +235,61 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 @media (min-width: 600px) {
   .calendar {
-    width: 50%;
+    width: 70%;
+    height: auto;
   }
-  #timeZone {
-    width: 50%;
-  }
-
-  .days-out {
-    width: 50%;
-  }
-
-  #get_full_date {
-    width: 50%;
-  }
-  .hours_and_minutes {
-    width: 50%;
-  }
-
-  .calendar__body-day {
-    height: 35px;
-  }
-}
-
-@media (min-width: 1000px) {
   .calendar__body-days {
     height: auto;
   }
   .calendar__body-day {
-    height: 50px;
+    height: 80%;
   }
 }
-/* .selectable:hover {
-  background-color: #dddddd;
-} */
+@media (min-width: 700px) {
+  .calendar {
+    height: auto;
+  }
+  .calendar__body-day {
+    height: 50px;
+    width: 80%;
+  }
+  #timeZone {
+    width: 73%;
+  }
+  .days-out {
+    width: 70%;
+  }
+}
+@media (min-width: 1024px) {
+  .calendar {
+    height: auto;
+    width: 55%;
+  }
+}
+@media (min-width: 1200px) {
+  #container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 2em;
+  }
+  .wrapper {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .calendar {
+    padding-bottom: 1em;
+    width: 80%;
+  }
+  .calendar__body-day {
+    height: 35px;
+  }
+}

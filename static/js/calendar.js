@@ -167,6 +167,17 @@ export default class Calendar {
       }
     });
   }
+  handleClickHoursStyles(_element) {
+    this.$hoursAndMinutes.querySelectorAll("div p").forEach((element, i) => {
+      element.classList.remove("active");
+    });
+    this.$hoursAndMinutes.querySelectorAll("div p").forEach((element, i) => {
+      if(element === _element){
+        _element.classList.add("active");
+        
+      }
+    });
+  }
   handleDaysOffDisabled() {
     this.el.querySelectorAll(".calendar__body-day").forEach((element, i) => {
       const dayForWeek = this.daysOff.includes(
@@ -189,7 +200,7 @@ export default class Calendar {
             dayElement.dataset.day
           )
         );
-        if (!isDisabled && !isDayOff) {          
+        if (!isDisabled && !isDayOff) {
           this.handleDayActive(parseInt(dayElement.dataset.day));
           this.handleDaySelected(parseInt(dayElement.dataset.day));
         }
@@ -199,6 +210,7 @@ export default class Calendar {
   handleClickHours() {
     this.$hoursAndMinutes.querySelectorAll("div p").forEach((element, i) => {
       element.addEventListener("click", () => {
+        this.handleClickHoursStyles(element);
         this.getHoursSelected = parseInt(element.dataset.hours);
         this.getMinutesSelected = parseInt(element.dataset.minutes);
       });

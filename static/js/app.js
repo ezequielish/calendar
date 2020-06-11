@@ -43,15 +43,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const $daysWeek = $daysOff.querySelectorAll(".day_week");
   $daysWeek.forEach((element) => {
     element.addEventListener("click", () => {
-      const dayActive = element.className.split(" ").includes("active"); //we look for the active class in divs
+      const dayActive = element.className.split(" ").includes("active"); //we look  active class on divs
       if (dayActive) {
         element.classList.remove("active"); //we remove the styles of this element
-        const day = parseInt(element.dataset.day); //we make sure what it is a  number value
-        calendar.removeDayOff(day); //we remove the day off
+        const day = parseInt(element.dataset.day); //we make sure that this is a  numeric value
+        calendar.removeDayOff(day); //we remove a day off
       } else {
         element.classList.add("active"); //we add the styles of this element
         const day = parseInt(element.dataset.day);
-        calendar.addDayOff(day); //we add the day off
+        calendar.addDayOff(day); //we add a day off
       }
     });
   });
@@ -66,10 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
   $getFullDate.addEventListener("click", () => {
     const result = calendar.getFullDate();
     console.log(result);
-    
+    alert('ve la consola')
   });
-
-
 });
 
 const functionWithPromise = (value, timeZone) => {
