@@ -13,73 +13,95 @@
 
   <body>
     <div id="container">
-      <div class="wrapper">
-        <select id="timeZone" class=""> </select>
-        <div class="days-out">
+      <div class="header">
+        <select class="country"> </select>
+        <div class="days-off">
           <h2>Días libres</h2>
-          <div class="days-day_off"></div>
+          <div class="days-off-container"></div>
         </div>
       </div>
-      <div class="wrapper">
-        <div class="calendar">
-          <div class="calendar__head">
-            <p id="calendar__head-year"></p>
-            <span id="calendar__head-dayname"></span>
-            <span id="calendar__head-month"></span>
-            <span id="calendar__head-day"></span>
+      <div class="div-off"></div>
+      <div class="calendar">
+        <div class="calendar-head">
+          <div class="head-info">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="18"
+              viewBox="0 0 24 24"
+              width="18"
+              fill="#00a5be"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"
+              />
+            </svg>
+            <span id="calendar-head-month_name"></span>
+            <span id="calendar-head-year"></span>
           </div>
-          <div class="calendar__body">
-            <div class="calendar__body-month">
-              <button id="btn-l">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  width="18"
-                >
-                  <path d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z"
-                  />
-                </svg>
-              </button>
-              <p id="date_in_arrows"></p>
-              <button id="btn-r">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  width="18"
-                >
-                  <path d="M0 0h24v24H0z" fill="none" />
-                  <path d="M5.88 4.12L13.76 12l-7.88 7.88L8 22l10-10L8 2z" />
-                </svg>
-              </button>
+          <div class="calendar-head-arrows-month">
+            <button id="btn-l">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                viewBox="0 0 24 24"
+                width="18"
+                fill="grey"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z" />
+              </svg>
+            </button>
+
+            <button id="btn-r">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                viewBox="0 0 24 24"
+                width="18"
+                fill="grey"
+              >
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M5.88 4.12L13.76 12l-7.88 7.88L8 22l10-10L8 2z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="calendar-body">
+          <div class="calendar-body-weekdays">
+            <div data-dayofweek="0">
+              Dom
+              <div data-dayofweek="0" class="calendar-body-days"></div>
             </div>
-            <div class="calendar__body-weekdays">
-              <div>Lun</div>
-              <div>Mar</div>
-              <div>Mie</div>
-              <div>Jue</div>
-              <div>Vie</div>
-              <div>Sab</div>
-              <div>Dom</div>
+            <div data-dayofweek="1">
+              Lun
+              <div data-dayofweek="1" class="calendar-body-days"></div>
             </div>
-            <div class="calendar__body-days"></div>
-            <div class="calendar__body-years">
-              <ul class="list_years"></ul>
+            <div data-dayofweek="2">
+              Mar
+              <div data-dayofweek="2" class="calendar-body-days"></div>
+            </div>
+            <div data-dayofweek="3">
+              Mie
+              <div data-dayofweek="3" class="calendar-body-days"></div>
+            </div>
+            <div data-dayofweek="4">
+              Jue
+              <div data-dayofweek="4" class="calendar-body-days"></div>
+            </div>
+            <div data-dayofweek="5">
+              Vie
+              <div data-dayofweek="5" class="calendar-body-days"></div>
+            </div>
+            <div data-dayofweek="6">
+              Sab
+              <div data-dayofweek="6" class="calendar-body-days"></div>
             </div>
           </div>
         </div>
-
-        <div class="hours_and_minutes">
-          <div class="hours_and_minutes__schedule_morning">Día</div>
-          <div class="hours_and_minutes__schedule_atfer-noon">Tarde</div>
-          <div class="hours_and_minutes__schedule_nigth">Noche</div>
-        </div>
-
-        <button id="get_full_date">GET DATE</button>
       </div>
+      <div class="time"></div>
+      <div class="result"></div>
     </div>
   </body>
 

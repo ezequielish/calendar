@@ -1,41 +1,48 @@
+import Day from "./day.js";
 export default class Calendar {
   constructor(el, yearFree, hours, minutes, continent, country) {
     this.el = el; //calendar container
+    this.$headMonthName = el.querySelector("#calendar-head-month_name");
+    this.$headYear = el.querySelector("#calendar-head-year");
+    this.$days = this.el.querySelectorAll(".calendar-body-days");
+
+    // this.$daysOffContainer = el.querySelector('.days-off-container')
+    // this.$daysOffContainer = el.querySelector('.days-off-container')
+    // this.$daysOffContainer = el.querySelector('.days-off-container')
     this.yearFree = yearFree;
-    this.$bodyYears = this.el.querySelector(".calendar__body-years");
-    this.$listYears = this.$bodyYears.querySelector(".list_years");
-    this.$days = this.el.querySelector(".calendar__body-days");
-    this.$headYear = this.el.querySelector("#calendar__head-year");
-    this.$headDay = this.el.querySelector("#calendar__head-day");
-    this.$headDayWeek = this.el.querySelector("#calendar__head-dayname");
-    this.$headMonth = this.el.querySelector("#calendar__head-month");
+    // this.$bodyYears = this.el.querySelector(".calendar__body-years");
+    // this.$listYears = this.$bodyYears.querySelector(".list_years");
+    // this.$headYear = this.el.querySelector("#calendar__head-year");
+    // this.$headDay = this.el.querySelector("#calendar__head-day");
+    // this.$headDayWeek = this.el.querySelector("#calendar__head-dayname");
+    // this.$headMonth = this.el.querySelector("#calendar__head-month");
     this.$btnL = this.el.querySelector("#btn-l");
     this.$btnR = this.el.querySelector("#btn-r");
-    this.$dateInArrows = this.el.querySelector("#date_in_arrows");
-    this.$hoursAndMinutes = document.querySelector(".hours_and_minutes");
-    this.$morning = this.$hoursAndMinutes.querySelector(
-      ".hours_and_minutes__schedule_morning"
-    );
+    // this.$dateInArrows = this.el.querySelector(".calendar-head-arrows-month");
+    // this.$hoursAndMinutes = document.querySelector(".hours_and_minutes");
+    // this.$morning = this.$hoursAndMinutes.querySelector(
+    //   ".hours_and_minutes__schedule_morning"
+    // );
 
-    this.$afterNoon = this.$hoursAndMinutes.querySelector(
-      ".hours_and_minutes__schedule_atfer-noon"
-    );
-    this.$night = this.$hoursAndMinutes.querySelector(
-      ".hours_and_minutes__schedule_nigth"
-    );
+    // this.$afterNoon = this.$hoursAndMinutes.querySelector(
+    //   ".hours_and_minutes__schedule_atfer-noon"
+    // );
+    // this.$night = this.$hoursAndMinutes.querySelector(
+    //   ".hours_and_minutes__schedule_nigth"
+    // );
 
-    this.getDay = new Date().getDate();
+    // this.getDay = new Date().getDate();
     this.getMonth = new Date().getMonth();
     this.getYear = new Date().getFullYear();
-    this.getDayWeek = new Date().getDay();
+    // this.getDayWeek = new Date().getDay();
     this.daySelected = [new Date().getDate(), new Date().getMonth()];
-    this.getHoursSelected = false;
-    this.getMinutesSelected = false;
-    this.getHours = hours;
-    this.getMinutes = minutes;
-    this.getContinent = continent;
-    this.getCountry = country;
-    this.daysOff = [];
+    // this.getHoursSelected = false;
+    // this.getMinutesSelected = false;
+    // this.getHours = hours;
+    // this.getMinutes = minutes;
+    // this.getContinent = continent;
+    // this.getCountry = country;
+    this.daysOff = [0, 5];
     this.monthsArray = [
       "Enero",
       "Febrero",
@@ -50,7 +57,7 @@ export default class Calendar {
       "Noviembre",
       "Diciembre",
     ];
-    this.daysOfWeek = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
+    this.daysOffWeek = ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"];
     this.render();
   }
 
@@ -70,7 +77,7 @@ export default class Calendar {
     return this.getMonth;
   }
   getYearFn() {
-    return this.getYear;
+    return this;
   }
   getDayOffWeekFn() {
     return this.getDayWeek;
@@ -90,18 +97,18 @@ export default class Calendar {
   }
 
   /**
-   * returns the day of the week, being 0 Sunday the first day and 6 saturday the last day.
+   * returns day of the week, being 0 Sunday the first day and 6 saturday the last day.
    */
   getDayForWeek(year, month, day) {
     return new Date(year, month, day).getDay();
   }
 
   getDayOffWeekForDay(day) {
-    return this.daysOfWeek[day];
+    return this.daysOffWeek[day];
   }
 
   getDaysOfWeek() {
-    return this.daysOfWeek;
+    return this.daysOffWeek;
   }
 
   decrementMonth() {
@@ -172,40 +179,82 @@ export default class Calendar {
       element.classList.remove("active");
     });
     this.$hoursAndMinutes.querySelectorAll("div p").forEach((element, i) => {
-      if(element === _element){
+      if (element === _element) {
         _element.classList.add("active");
-        
       }
     });
   }
-  handleDaysOffDisabled() {
-    this.el.querySelectorAll(".calendar__body-day").forEach((element, i) => {
-      const dayForWeek = this.daysOff.includes(
-        this.getDayForWeek(this.getYear, this.getMonth, i + 1)
-      );
-      if (dayForWeek) {
-        element.classList.add("disabled");
+  handleStylesOfDaysOff() {
+    const $daysForWeekContainer = this.el.querySelectorAll(
+      ".calendar-body-days"
+    );
+    const $daysForWeek = this.el.querySelectorAll(".calendar-body-days p");
+    let $elementsDown = [];
+    let dayWeekDayOne = "";
+    $daysForWeek.forEach((dayelement, i) => {
+      // console.log(parseInt(dayelement.dataset.day));
+      if (
+        parseInt(dayelement.dataset.day) >= 1 &&
+        parseInt(dayelement.dataset.day) <= 7
+      ) {
+        if (parseInt(dayelement.dataset.day) === 1) {
+          // elementsDown.push(dayelement.parentNode)
+          // console.log(dayelement)
+          // console.log(dayelement.parentNode.dataset.dayofweek)
+          dayWeekDayOne = parseInt(dayelement.parentNode.dataset.dayofweek);
+        }
       }
     });
+    $daysForWeekContainer.forEach((container) => {
+      if (parseInt(container.dataset.dayofweek) < dayWeekDayOne) {
+        
+        container.querySelectorAll('p').forEach((dayelement, i) => {
+          console.log(i+2);
+          dayelement.style.gridRow=`${i+2}/${i+2}`
+        });
+      }
+    });
+    // console.log($dayWeekDayOne );
+
+    // //we add styles in the days of week off
+    // this.el.querySelectorAll(".calendar-body-day").forEach((element, i) => {
+    //   const dayForWeek = this.daysOff.includes(
+    //     this.getDayForWeek(this.getYear, this.getMonth, i + 1)
+    //   );
+    //   if (dayForWeek) {
+    //     element.classList.add("disabled");
+    //   }
+    // });
+    // //we add styles in the header day of week in calendar
+    // const $daysOffWeek = document.querySelectorAll(
+    //   ".calendar-body-weekdays div"
+    // );
+
+    // $daysOffWeek.forEach((element) => {
+    //   const parse = parseInt(element.dataset.dayofweek);
+    //   if (this.daysOff.includes(parse)) {
+    //     element.classList.add("disabled");
+    //   }
+    // });
   }
 
   handleClickInDay() {
-    this.$days.querySelectorAll("div").forEach((dayElement) => {
-      dayElement.addEventListener("click", () => {
-        const isDisabled = dayElement.className.split(" ").includes("disabled");
-        const isDayOff = this.daysOff.includes(
-          this.getDayForWeek(
-            this.getYear,
-            this.getMonth,
-            dayElement.dataset.day
-          )
-        );
-        if (!isDisabled && !isDayOff) {
-          this.handleDayActive(parseInt(dayElement.dataset.day));
-          this.handleDaySelected(parseInt(dayElement.dataset.day));
-        }
-      });
-    });
+    // this.$days.querySelectorAll("div").forEach((dayElement) => {
+    //   dayElement.addEventListener("click", () => {
+    //     const isDisabled = dayElement.className.split(" ").includes("disabled");
+    //     const isDayOff = this.daysOff.includes(
+    //       this.getDayForWeek(
+    //         this.getYear,
+    //         this.getMonth,
+    //         dayElement.dataset.day
+    //       )
+    //     );
+    //     if (!isDisabled && !isDayOff) {
+    //       this.handleDayActive(parseInt(dayElement.dataset.day));
+    //       this.handleDaySelected(parseInt(dayElement.dataset.day));
+    //     }
+    //   });
+    // });
   }
   handleClickHours() {
     this.$hoursAndMinutes.querySelectorAll("div p").forEach((element, i) => {
@@ -265,35 +314,6 @@ export default class Calendar {
 
     return timeZone;
   }
-  buildDays(day, index) {
-    const getDay = new Date().getDate();
-    const getMonths = new Date().getMonth();
-    const getFullYear = new Date().getFullYear();
-    const daysOfWeek = this.getDayForWeek(this.getYear, this.getMonth, day);
-    if (day < getDay && !this.yearFree) {
-      if (this.getMonth == getMonths && this.getYear == getFullYear) {
-        return `<div class="calendar__body-day disabled " data-day="${day}" style="grid-column:${
-          daysOfWeek == 0 && index == 0 ? 7 : daysOfWeek
-        }">${day}</div>`;
-      } else {
-        return `<div class="calendar__body-day selectable ${
-          this.daySelected[0] == day &&
-          this.daySelected[1] == this.getMonth &&
-          "active"
-        }" data-day="${day}" style="grid-column:${
-          daysOfWeek == 0 && index == 0 ? 7 : daysOfWeek
-        }">${day}</div>`;
-      }
-    } else {
-      return `<div class="calendar__body-day selectable ${
-        this.daySelected[0] == day &&
-        this.daySelected[1] == this.getMonth &&
-        "active"
-      }" data-day="${day}" style="grid-column:${
-        daysOfWeek == 0 && index == 0 ? 7 : daysOfWeek
-      }">${day}</div>`;
-    }
-  }
 
   buildYears(year) {
     return `<li id="${year}" class="item_year ${
@@ -301,13 +321,45 @@ export default class Calendar {
     }" data-year=${year}>${year}</li>`;
   }
 
+  handleClickDay() {
+    // const allDays = this.$days.querySelectorAll(".calendar-body-day");
+    // allDays.forEach((day) => {
+    //   day.addEventListener("click", () => {});
+    // });
+  }
+  addEventListeners() {
+    // this.handleClickDay();
+    this.handleClickInDay();
+  }
+
+  //DAYS
+  resetDaysCalendar() {
+    const $days = this.el.querySelectorAll(".calendar-body-days");
+    $days.forEach((element) => (element.innerHTML = ""));
+  }
   renderDays() {
-    this.$days.innerHTML = "";
+    // this.$days.innerHTML = "";
+    this.resetDaysCalendar()
+    // for (let index = 0; index < 31; index++) {
+    //   this.$days.innerHTML += "<div class='calendar-body-day'></div>";
+    // }
+
     const days = this.getNumDayForMonth(this.getMonth, this.getYear);
-    days.map((day, i) => {
-      return (this.$days.innerHTML += this.buildDays(day, i));
+
+    days.map((day, key) => {
+      Day(
+        this.$days,
+        day,
+        key,
+        this.getYear,
+        this.getMonth,
+        this.daySelected,
+        this.getDayForWeek,
+        this.yearFree
+      );
     });
-    this.handleDaysOffDisabled();
+
+    // this.handleStylesOfDaysOff();
   }
 
   renderSelectionOfYears() {
@@ -380,23 +432,24 @@ export default class Calendar {
 
   render() {
     this.handleArrows();
-    this.$dateInArrows.innerHTML = `${this.months()[this.getMonth]} ${
-      this.getYear
-    }`;
+
+    this.$headMonthName.innerHTML = this.months()[this.getMonth];
     this.$headYear.innerHTML = this.getYear;
-    this.$headDay.innerHTML = this.getDay;
-    this.$headMonth.innerHTML = this.months()[this.getMonth];
+    // this.$headDay.innerHTML = this.getDay;
+    // this.$headMonth.innerHTML = this.months()[this.getMonth];
 
-    this.$headDayWeek.innerHTML = `${this.getDayOffWeekForDay(
-      this.getDayWeek
-    )},`;
+    // this.$headDayWeek.innerHTML = `${this.getDayOffWeekForDay(
+    //   this.getDayWeek
+    // )},`;
     this.renderDays();
-    this.renderSelectionOfYears();
 
-    if (this.yearFree == false) {
-      this.renderHours();
-    }
-    this.handleClickInDay();
-    this.handleClickHours();
+    this.addEventListeners();
+    // this.renderSelectionOfYears();
+
+    // if (this.yearFree == false) {
+    //   this.renderHours();
+    // }
+    // this.handleClickInDay();
+    // this.handleClickHours();
   }
 }
