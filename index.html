@@ -69,39 +69,90 @@
         </div>
         <div class="calendar-body">
           <div class="calendar-body-weekdays">
-            <div data-dayofweek="0">
-              Dom
-              <div data-dayofweek="0" class="calendar-body-days"></div>
-            </div>
-            <div data-dayofweek="1">
+            <div data-dayofweek="1" class="days-of-week-container">
               Lun
-              <div data-dayofweek="1" class="calendar-body-days"></div>
+              <div></div>
             </div>
-            <div data-dayofweek="2">
+            <div data-dayofweek="2" class="days-of-week-container">
               Mar
-              <div data-dayofweek="2" class="calendar-body-days"></div>
+              <div></div>
             </div>
-            <div data-dayofweek="3">
+            <div data-dayofweek="3" class="days-of-week-container">
               Mie
-              <div data-dayofweek="3" class="calendar-body-days"></div>
+              <div></div>
             </div>
-            <div data-dayofweek="4">
+            <div data-dayofweek="4" class="days-of-week-container">
               Jue
-              <div data-dayofweek="4" class="calendar-body-days"></div>
+              <div></div>
             </div>
-            <div data-dayofweek="5">
+            <div data-dayofweek="5" class="days-of-week-container">
               Vie
-              <div data-dayofweek="5" class="calendar-body-days"></div>
+              <div></div>
             </div>
-            <div data-dayofweek="6">
+            <div data-dayofweek="6" class="days-of-week-container">
               Sab
-              <div data-dayofweek="6" class="calendar-body-days"></div>
+              <div></div>
             </div>
+            <div data-dayofweek="0" class="days-of-week-container">
+              Dom
+              <div></div>
+            </div>
+          </div>
+          <div class="calendar-body-days"></div>
+          <div class="calendar-body-years">
+            <ul class="list-years"></ul>
           </div>
         </div>
       </div>
-      <div class="time"></div>
-      <div class="result"></div>
+      <footer>
+        <div class="time">
+          <div class="hours-schedule-morning schedule">
+            Día
+            <div></div>
+          </div>
+          <div class="hours-minutes-schedule-atfer-noon schedule">
+            Tarde
+            <div></div>
+          </div>
+          <div class="hours-minutes-schedule-nigth schedule">
+            Noche
+            <div></div>
+          </div>
+        </div>
+        <button class="appointment" disabled>
+          Agendar cita
+        </button>
+      </footer>
+      <div class="result close">
+        <button class="go-back">
+          <img src="./static/icons/arrow_back_ios-24px.svg" />
+        </button>
+        <div class="result-header">
+          <div class="img-container">
+            <img src="static/img/profile.jpg" width="100%" height="100%" />
+          </div>
+          <h3 id="coach-name">Sophie Karina</h3>
+        </div>
+        <div class="result-body">
+          <div id="result-date">
+            <img
+              src="./static/icons/calendar_today-24px.svg"
+              width="45px"
+              height="45px"
+            />
+            <p></p>
+          </div>
+          <div id="result-hour">
+            <img
+              src="./static/icons/access_time-24px.svg"
+              width="45px"
+              height="45px"
+            />
+
+            <p></p>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 
